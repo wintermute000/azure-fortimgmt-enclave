@@ -18,6 +18,8 @@ Ubuntu 20.04 LTS Jumphost
 * Terraform Provider Template >= 2.2.0
 * Terraform Provider Random >= 3.1.0
 
+Developed using FOS/FMG/FAZ 7.2.1, older versions will probably work but not tested
+
 ## Deployment overview
 Terraform deploys the following components:
 
