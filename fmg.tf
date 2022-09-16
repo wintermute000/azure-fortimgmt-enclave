@@ -3,7 +3,7 @@ resource "azurerm_virtual_machine" "fmgvm" {
   location                         = var.location
   resource_group_name              = azurerm_resource_group.myterraformgroup.name
   network_interface_ids            = [azurerm_network_interface.fmgport1.id, ]
-  vm_size                          = var.size
+  vm_size                          = var.fmgsize
   delete_os_disk_on_termination    = true
   delete_data_disks_on_termination = true
 
