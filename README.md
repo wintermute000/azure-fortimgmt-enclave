@@ -30,8 +30,8 @@ Terraform deploys the following components:
 * FortiAnalyzer VM in the first workload subnet. Note: a license (or trial registration) is required on first login.
 * Ubuntu 20.04 LTS test client VM in the first workload subnet.
 * UDRs for internal subnet routing table for default routing and inter-subnet routing through FortiGate.
-* FortiGate - Choose PAYG or BYOL in variables - if BYOL, place .lic files in subfolder "licenses" and define in variables.
-* FortiManager / FortiAnalyzer - Choose PAYG or BYOL in variables - if BYOL, place .lic files in subfolder "licenses" and define in variables.
+* FortiGate - Choose payg or byol in variables - if byol, place .lic files in subfolder "licenses" and define in variables.
+* FortiManager / FortiAnalyzer - Choose trial or byol in variables - if byol, place .lic files in subfolder "licenses" and define in variables.
 * Use lowercase for payg, byol, trial variables.
 * Terraform backend (versions.tf) stored in Azure storage - customise backend.conf to suit or modify as appropriate. An backend.conf.example is provided or comment out the backend "azurerm" resource block.
 
