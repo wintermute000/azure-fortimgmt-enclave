@@ -35,7 +35,7 @@ Terraform deploys the following components:
 
 Topology using default variables
 
-![img](https://github.com/wintermute000/azure-fgt-single/blob/main/azure-fgt-single.jpg)
+![img](https://github.com/wintermute000/azure-fortimgmt-enclave/blob/main/azure-mgmt-enclave.jpg)
 
 **If BYOL is used, then some policies cannot be created in FortiOS due to the limitation of unlicensed VM only allowing 3 policies. Add the remaining policies/VIPs after creation. Default routing and port 443 access to FMG/FAZ has been deliberately placed first.**
 
