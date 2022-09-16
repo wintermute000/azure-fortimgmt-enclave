@@ -146,6 +146,19 @@ variable "custom_image_resource_group_name" {
 variable "license_type" {
   default = "payg"
 }
+
+// License Type to create FortiManager-VM
+// Provide the license type for FortiManager-VM Instances, either byol or trial. If BYOL the license variables need to be set.
+variable "fmg_license_type" {
+  default = "trial"
+}
+
+// License Type to create FortiAnalyzer-VM
+// Provide the license type for FortiAnalyzer-VM Instances, either byol or trial. If BYOL the license variables need to be set.
+variable "faz_license_type" {
+  default = "trial"
+}
+
 // enable accelerate network, either true or false, default is false
 // Make the the instance choosed supports accelerated networking.
 // Check: https://docs.microsoft.com/en-us/azure/virtual-network/accelerated-networking-overview#supported-vm-instances
@@ -334,15 +347,15 @@ variable "license" {
 }
 
 variable "fmglicense" {
-  // Change to your own byol license file, license.lic
+  // Change to your own byol license file, license.lic in licenses folder
   type    = string
   default = "FMG-VMTM22012011.lic"
 }
 
 variable "fazlicense" {
-  // Change to your own byol license file, license.lic
+  // Change to your own byol license file, license.lic in licenses folder
   type    = string
-  default = "FGVM02TM22024054.lic"
+  default = "FAZ-VMTM22012345.lic"
 }
 
 variable "tags" {

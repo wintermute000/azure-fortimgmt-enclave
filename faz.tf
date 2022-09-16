@@ -41,7 +41,9 @@ resource "azurerm_virtual_machine" "fazvm" {
     admin_username = var.fmgfazadminusername
     admin_password = var.fmgfazadminpassword
     custom_data = templatefile("${var.bootstrap-faz}", {
-      gwy = var.port1gateway
+      gwy          = var.port1gateway
+      type         = var.faz_license_type
+      license_file = "${path.module}/licenses/${var.fazlicense}"
     })
   }
 

@@ -24,20 +24,22 @@ Terraform deploys the following components:
 * Azure Virtual Network with 4 subnets - external, internal, 2x workload subnets
 * 1x FortiGate-VM (BYOL/PAYG) instances with two NICs.  
 * Untrust interface placed in SD-WAN zone "Underlay".
-* 7x firewall rules / VIPs - permit outbound, permit internal, permit FMG TCP 4444 --> 443, TCP 541 --> 541, permit FAZ TCP 4444 --> 443, TCP 514 --> 514, UDP 514 -- 514
+* 7x firewall rules / VIPs on single public IP - permit outbound, permit internal, permit TCP 4444 --> FMG TCP 443, TCP 541 --> FMG TCP 541, permit TCP 4444 --> FAZ TCP 443, TCP 514 --> FAZ TCP 514, UDP 514 -- FAZ UDP 514
 * Azure SDN connector using managed identity with reader.
 * FortiManager VM in the first workload subnet. Note:  a license (or trial registration) is required on first login. 
 * FortiAnalyzer VM in the first workload subnet. Note: a license (or trial registration) is required on first login.
 * Ubuntu 20.04 LTS test client VM in the first workload subnet.
 * UDRs for internal subnet routing table for default routing and inter-subnet routing through FortiGate.
-* Choose PAYG or BYOL in variables - if BYOL, place .lic files in subfolder "licenses" and define in variables.
+* FortiGate - Choose PAYG or BYOL in variables - if BYOL, place .lic files in subfolder "licenses" and define in variables.
+* FortiManager / FortiAnalyzer - Choose PAYG or BYOL in variables - if BYOL, place .lic files in subfolder "licenses" and define in variables.
+* Use lowercase for payg, byol, trial variables.
 * Terraform backend (versions.tf) stored in Azure storage - customise backend.conf to suit or modify as appropriate. An backend.conf.example is provided or comment out the backend "azurerm" resource block.
 
 Topology using default variables
 
 ![img](https://github.com/wintermute000/azure-fortimgmt-enclave/blob/main/azure-fortimgmt-enclave.jpg)
 
-**If BYOL is used, then some policies cannot be created in FortiOS due to the limitation of unlicensed VM only allowing 3 policies. Add the remaining policies/VIPs after creation. Default routing and port 443 access to FMG/FAZ has been deliberately placed first.**
+**If BYOL FortiGate is used, then some policies cannot be created in FortiOS due to the limitation of unlicensed VM only allowing 3 policies. Add the remaining policies/VIPs after creation. Default routing and port 443 access to FMG/FAZ has been deliberately placed first.**
 
 ## Deployment
 
