@@ -26,8 +26,8 @@ Terraform deploys the following components:
 * Untrust interface placed in SD-WAN zone "Underlay".
 * 7x firewall rules / VIPs on single public IP - permit outbound, permit internal, permit TCP 4444 --> FMG TCP 443, TCP 541 --> FMG TCP 541, permit TCP 4444 --> FAZ TCP 443, TCP 514 --> FAZ TCP 514, UDP 514 -- FAZ UDP 514
 * Azure SDN connector using managed identity with reader.
-* FortiManager VM in the first workload subnet. Note:  a license (or trial registration) is required on first login. 
-* FortiAnalyzer VM in the first workload subnet. Note: a license (or trial registration) is required on first login.
+* FortiManager VM in the first workload subnet. 
+* FortiAnalyzer VM in the first workload subnet. 
 * Ubuntu 20.04 LTS test client VM in the first workload subnet.
 * UDRs for internal subnet routing table for default routing and inter-subnet routing through FortiGate.
 * FortiGate - Choose payg or byol in variables - if byol, place .lic files in subfolder "licenses" and define in variables.
