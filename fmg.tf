@@ -2,15 +2,15 @@ resource "azurerm_virtual_machine" "fmgvm" {
   name                             = var.fmgname
   location                         = var.location
   resource_group_name              = azurerm_resource_group.myterraformgroup.name
-  network_interface_ids            = [azurerm_network_interface.fmgport1.id,]
+  network_interface_ids            = [azurerm_network_interface.fmgport1.id, ]
   vm_size                          = var.size
   delete_os_disk_on_termination    = true
   delete_data_disks_on_termination = true
 
   plan {
-    name = var.fmgoffer
+    name      = var.fmgoffer
     publisher = "fortinet"
-    product       = var.fmgsku
+    product   = var.fmgsku
   }
 
   storage_image_reference {
@@ -21,7 +21,7 @@ resource "azurerm_virtual_machine" "fmgvm" {
   }
 
   storage_os_disk {
-    name              = "fmgosDisk"
+    name              = "${var.fmgname}-osDisk"
     caching           = "ReadWrite"
     managed_disk_type = "Premium_LRS"
     create_option     = "FromImage"
@@ -29,7 +29,7 @@ resource "azurerm_virtual_machine" "fmgvm" {
 
   # Log data disks
   storage_data_disk {
-    name              = "fmgdatadisk"
+    name              = "${var.fmgname}-datadisk"
     managed_disk_type = "Standard_LRS"
     create_option     = "Empty"
     lun               = 0
@@ -41,7 +41,7 @@ resource "azurerm_virtual_machine" "fmgvm" {
     admin_username = var.fmgfazadminusername
     admin_password = var.fmgfazadminpassword
     custom_data = templatefile("${var.bootstrap-fmg}", {
-      gwy     = var.port1gateway
+      gwy = var.port1gateway
     })
   }
 

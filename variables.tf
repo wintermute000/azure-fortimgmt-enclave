@@ -15,6 +15,7 @@ variable "tenant_id" {
   type = string
 }
 
+
 //  For HA, choose instance size that support 4 nics at least
 //  Check : https://docs.microsoft.com/en-us/azure/virtual-machines/linux/sizes
 variable "size" {

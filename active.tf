@@ -112,7 +112,7 @@ resource "azurerm_virtual_machine" "activefgtvm" {
 
 
   storage_os_disk {
-    name              = "osDisk"
+    name              = "${var.activename}-osDisk"
     caching           = "ReadWrite"
     managed_disk_type = "Standard_LRS"
     create_option     = "FromImage"
@@ -120,7 +120,7 @@ resource "azurerm_virtual_machine" "activefgtvm" {
 
   # Log data disks
   storage_data_disk {
-    name              = "activedatadisk"
+    name              = "${var.activename}-activedatadisk"
     managed_disk_type = "Standard_LRS"
     create_option     = "Empty"
     lun               = 0
@@ -128,7 +128,7 @@ resource "azurerm_virtual_machine" "activefgtvm" {
   }
 
   os_profile {
-    computer_name  = "activefgt"
+    computer_name  = var.activename
     admin_username = var.adminusername
     admin_password = var.adminpassword
     custom_data = templatefile("${var.bootstrap-active}", {
@@ -146,8 +146,8 @@ resource "azurerm_virtual_machine" "activefgtvm" {
       # clientid        = var.client_id
       # clientsecret    = var.client_certificate_path
       adminsport     = var.adminsport
-      fmgadminsport     = var.fmgadminsport
-      fazadminsport     = var.fazadminsport
+      fmgadminsport  = var.fmgadminsport
+      fazadminsport  = var.fazadminsport
       sshport        = var.sshport
       vnetcidr       = var.vnetcidr
       rsg            = azurerm_resource_group.myterraformgroup.name

@@ -120,7 +120,7 @@ resource "azurerm_network_security_group" "privatenetworknsg" {
 
 // Active FGT Network Interface port1
 resource "azurerm_network_interface" "activeport1" {
-  name                          = "activeport1"
+  name                          = "${var.activename}-activeport1"
   location                      = var.location
   resource_group_name           = azurerm_resource_group.myterraformgroup.name
   enable_ip_forwarding          = true
@@ -139,7 +139,7 @@ resource "azurerm_network_interface" "activeport1" {
 }
 
 resource "azurerm_network_interface" "activeport2" {
-  name                          = "activeport2"
+  name                          = "${var.activename}-activeport2"
   location                      = var.location
   resource_group_name           = azurerm_resource_group.myterraformgroup.name
   enable_ip_forwarding          = true
@@ -156,7 +156,7 @@ resource "azurerm_network_interface" "activeport2" {
 }
 
 resource "azurerm_network_interface" "fmgport1" {
-  name                          = "fmgport1"
+  name                          = "${var.fmgname}-fmgport1"
   location                      = var.location
   resource_group_name           = azurerm_resource_group.myterraformgroup.name
   enable_ip_forwarding          = true
@@ -173,7 +173,7 @@ resource "azurerm_network_interface" "fmgport1" {
 }
 
 resource "azurerm_network_interface" "fazport1" {
-  name                          = "fazport1"
+  name                          = "${var.fazname}-fazport1"
   location                      = var.location
   resource_group_name           = azurerm_resource_group.myterraformgroup.name
   enable_ip_forwarding          = true
