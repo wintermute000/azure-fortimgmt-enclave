@@ -248,6 +248,16 @@ variable "adminsport" {
   default = "8443"
 }
 
+variable "adminport" {
+  type    = string
+  default = "8080"
+}
+
+variable "fgtmgmtpip" {
+  type    = string
+  default = "1.1.1.1"
+}
+
 variable "fmgadminsport" {
   type    = string
   default = "4443"

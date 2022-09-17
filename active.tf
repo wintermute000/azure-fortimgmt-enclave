@@ -146,6 +146,7 @@ resource "azurerm_virtual_machine" "activefgtvm" {
       # clientid        = var.client_id
       # clientsecret    = var.client_certificate_path
       adminsport     = var.adminsport
+      adminport     = var.adminport
       fmgadminsport  = var.fmgadminsport
       fazadminsport  = var.fazadminsport
       sshport        = var.sshport
