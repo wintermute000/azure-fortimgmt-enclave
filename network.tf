@@ -97,7 +97,6 @@ resource "azurerm_network_security_rule" "privatenetworknsgrules" {
 }
 
 
-
 // Active FGT Network Interface port1
 resource "azurerm_network_interface" "activeport1" {
   name                          = "${var.activename}-activeport1"
