@@ -402,7 +402,7 @@ variable "publicnsg" {
       access                     = "Allow"
       protocol                   = "*"
       source_port_range          = "*"
-      destination_port_range     = "8442"
+      destination_port_range     = "8443"
       source_address_prefix      = "111.111.111.111/32"
       destination_address_prefix = "*"
     }
