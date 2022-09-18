@@ -81,9 +81,8 @@ resource "azurerm_network_security_group" "privatenetworknsg" {
   tags = local.common_tags
 }
 
-
 resource "azurerm_network_security_rule" "privatenetworknsgrules" {
-    for_each = var.publicnsg
+    for_each = var.privatensg
     name                       = each.value.name
     priority                   = each.value.priority
     direction                  = each.value.direction
@@ -97,37 +96,6 @@ resource "azurerm_network_security_rule" "privatenetworknsgrules" {
     network_security_group_name = azurerm_network_security_group.privatenetworknsg.name
 }
 
-resource "azurerm_network_security_group" "privatenetworknsg" {
-  name                = "PrivateNetworkSecurityGroup"
-  location            = var.location
-  resource_group_name = azurerm_resource_group.myterraformgroup.name
-
-  security_rule {
-    name                       = "ingress"
-    priority                   = 100
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
-    name                       = "egress"
-    priority                   = 100
-    direction                  = "Outbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
-
-  tags = local.common_tags
-}
 
 
 // Active FGT Network Interface port1
