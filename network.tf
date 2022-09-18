@@ -178,8 +178,23 @@ resource "azurerm_network_interface_security_group_association" "port1nsg" {
 resource "azurerm_network_interface_security_group_association" "port2nsg" {
   depends_on                = [azurerm_network_interface.activeport2]
   network_interface_id      = azurerm_network_interface.activeport2.id
-  network_security_group_id = azurerm_network_security_group.publicnetworknsg.id
+  network_security_group_id = azurerm_network_security_group.privatenetworknsg.id
 }
 
+resource "azurerm_network_interface_security_group_association" "fmgport1nsg" {
+  depends_on                = [azurerm_network_interface.activeport2]
+  network_interface_id      = azurerm_network_interface.activeport2.id
+  network_security_group_id = azurerm_network_security_group.privatenetworknsg.id
+}
 
+resource "azurerm_network_interface_security_group_association" "fazport1nsg" {
+  depends_on                = [azurerm_network_interface.fazport1]
+  network_interface_id      = azurerm_network_interface.fazport1.id
+  network_security_group_id = azurerm_network_security_group.privatenetworknsg.id
+}
 
+resource "azurerm_network_interface_security_group_association" "client1nsg" {
+  depends_on                = [azurerm_network_interface.client1_nic]
+  network_interface_id      = azurerm_network_interface.client1_nic.id
+  network_security_group_id = azurerm_network_security_group.privatenetworknsg.id
+}
