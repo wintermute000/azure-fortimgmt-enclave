@@ -182,8 +182,8 @@ resource "azurerm_network_interface_security_group_association" "port2nsg" {
 }
 
 resource "azurerm_network_interface_security_group_association" "fmgport1nsg" {
-  depends_on                = [azurerm_network_interface.activeport2]
-  network_interface_id      = azurerm_network_interface.activeport2.id
+  depends_on                = [azurerm_network_interface.fmgport1]
+  network_interface_id      = azurerm_network_interface.fmgport1.id
   network_security_group_id = azurerm_network_security_group.privatenetworknsg.id
 }
 
