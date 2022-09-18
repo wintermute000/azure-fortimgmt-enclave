@@ -56,104 +56,45 @@ resource "azurerm_network_security_group" "publicnetworknsg" {
   name                = "PublicNetworkSecurityGroup"
   location            = var.location
   resource_group_name = azurerm_resource_group.myterraformgroup.name
-
-  security_rule {
-    name                       = "Allow Management SSH"
-    priority                   = 100
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "${var.sshport}"
-    source_address_prefix      = "${var.fgtmgmtpip}/32"
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
-    name                       = "Allow Management HTTP"
-    priority                   = 110
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "${var.adminport}"
-    source_address_prefix      = "${var.fgtmgmtpip}/32"
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
-    name                       = "Allow Management HTTPS"
-    priority                   = 120
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "${var.adminsport}"
-    source_address_prefix      = "${var.fgtmgmtpip}/32"
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
-    name                       = "Block Management SSH"
-    priority                   = 200
-    direction                  = "Inbound"
-    access                     = "Deny"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "2222"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
-    name                       = "Block Management HTTP"
-    priority                   = 210
-    direction                  = "Inbound"
-    access                     = "Deny"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "8080"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
-    name                       = "Block Management HTTPS"
-    priority                   = 220
-    direction                  = "Inbound"
-    access                     = "Deny"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "8443"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
-    name                       = "ingress"
-    priority                   = 300
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
-    name                       = "egress"
-    priority                   = 100
-    direction                  = "Outbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
-
   tags = local.common_tags
+}
+
+resource "azurerm_network_security_rule" "publicnetworknsgrules" {
+    for_each = var.publicnsg
+    name                       = each.value.name
+    priority                   = each.value.priority
+    direction                  = each.value.direction
+    access                     = each.value.access
+    protocol                   = each.value.protocol
+    source_port_range          = each.value.source_port_range
+    destination_port_range     = each.value.destination_port_range
+    source_address_prefix      = each.value.source_address_prefix
+    destination_address_prefix = each.value.destination_address_prefix
+    resource_group_name = azurerm_resource_group.myterraformgroup.name    
+    network_security_group_name = azurerm_network_security_group.publicnetworknsg.name
+}
+  
+resource "azurerm_network_security_group" "privatenetworknsg" {
+  name                = "PrivateNetworkSecurityGroup"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.myterraformgroup.name
+  tags = local.common_tags
+}
+
+
+resource "azurerm_network_security_rule" "privatenetworknsgrules" {
+    for_each = var.publicnsg
+    name                       = each.value.name
+    priority                   = each.value.priority
+    direction                  = each.value.direction
+    access                     = each.value.access
+    protocol                   = each.value.protocol
+    source_port_range          = each.value.source_port_range
+    destination_port_range     = each.value.destination_port_range
+    source_address_prefix      = each.value.source_address_prefix
+    destination_address_prefix = each.value.destination_address_prefix
+    resource_group_name = azurerm_resource_group.myterraformgroup.name    
+    network_security_group_name = azurerm_network_security_group.privatenetworknsg.name
 }
 
 resource "azurerm_network_security_group" "privatenetworknsg" {

@@ -253,11 +253,6 @@ variable "adminport" {
   default = "8080"
 }
 
-variable "fgtmgmtpip" {
-  type    = string
-  default = "1.1.1.1"
-}
-
 variable "fmgadminsport" {
   type    = string
   default = "4443"
@@ -375,3 +370,124 @@ variable "tags" {
   }
 }
 
+variable "publicnsg" {
+  type = map(map(string))
+  default = {
+    i100 = {
+      name                       = "Allow Management SSH"
+      priority                   = 100
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "*"
+      source_port_range          = "*"
+      destination_port_range     = "2222"
+      source_address_prefix      = "111.111.111.111/32"
+      destination_address_prefix = "*"
+    }
+    i110 = {
+      name                       = "Allow Management HTTP"
+      priority                   = 110
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "*"
+      source_port_range          = "*"
+      destination_port_range     = "8080"
+      source_address_prefix      = "111.111.111.111/32"
+      destination_address_prefix = "*"
+    }
+    i120 = {
+      name                       = "Allow Management HTTPS"
+      priority                   = 120
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "*"
+      source_port_range          = "*"
+      destination_port_range     = "8442"
+      source_address_prefix      = "111.111.111.111/32"
+      destination_address_prefix = "*"
+    }
+    i200 = {
+      name                       = "Block Management SSH"
+      priority                   = 200
+      direction                  = "Inbound"
+      access                     = "Deny"
+      protocol                   = "*"
+      source_port_range          = "*"
+      destination_port_range     = "2222"
+      source_address_prefix      = "*"
+      destination_address_prefix = "*"
+    }
+    i210 = {
+      name                       = "Block Management HTTP"
+      priority                   = 210
+      direction                  = "Inbound"
+      access                     = "Deny"
+      protocol                   = "*"
+      source_port_range          = "*"
+      destination_port_range     = "8080"
+      source_address_prefix      = "*"
+      destination_address_prefix = "*"
+    }
+    i220 = {
+      name                       = "Block Management HTTPS"
+      priority                   = 220
+      direction                  = "Inbound"
+      access                     = "Deny"
+      protocol                   = "*"
+      source_port_range          = "*"
+      destination_port_range     = "8443"
+      source_address_prefix      = "*"
+      destination_address_prefix = "*"
+    }
+    i300 = {
+      name                       = "ingress"
+      priority                   = 300
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "*"
+      source_port_range          = "*"
+      destination_port_range     = "*"
+      source_address_prefix      = "*"
+      destination_address_prefix = "*"
+    }
+    e100 = {
+      name                       = "egress"
+      priority                   = 100
+      direction                  = "Outbound"
+      access                     = "Allow"
+      protocol                   = "*"
+      source_port_range          = "*"
+      destination_port_range     = "*"
+      source_address_prefix      = "*"
+      destination_address_prefix = "*"
+    }
+  }
+}
+
+variable "privatensg" {
+  type = map(map(string))
+  default = {
+    i100 = {
+    name                       = "ingress"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+    }
+    e100 = {
+    name                       = "egress"
+    priority                   = 100
+    direction                  = "Outbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+    }
+  }
+}

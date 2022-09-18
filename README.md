@@ -27,7 +27,7 @@ Terraform deploys the following components:
 * 1x FortiGate-VM (BYOL/PAYG) instances with two NICs.  
 * Untrust interface placed in SD-WAN zone "Underlay".
 * 7x firewall rules / VIPs on single public IP - permit outbound, permit internal, permit TCP 4443 --> FMG TCP 443, TCP 541 --> FMG TCP 541, permit TCP 4444 --> FAZ TCP 443, TCP 514 --> FAZ TCP 514, UDP 514 -- FAZ UDP 514
-* Public IP has NSG rules only permitting 8443, 8080 and 2222 from a single public IP defined as the "fgtmgmtpip" variable. These ports are the default admin ports used by the FortiGate.
+* Public IP has NSG rules only permitting 8443, 8080 and 2222 from a single public IP defined as the "publicnsg" variable. These ports are the default admin ports used by the FortiGate. Adjust "publicnsg" and "privatensg" variables as appropriate.
 * Azure SDN connector using managed identity with reader.
 * FortiManager VM in the first workload subnet.
 * FortiAnalyzer VM in the first workload subnet.
