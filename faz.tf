@@ -43,7 +43,7 @@ resource "azurerm_virtual_machine" "fazvm" {
     custom_data = templatefile("${var.bootstrap-faz}", {
       gwy          = var.port1gateway
       type         = var.faz_license_type
-      license_file = "${path.module}/licenses/${var.fazlicense}"
+      license_file = var.fazlicense != "" ? "./licenses/${var.fazlicense}" : ""
     })
   }
 

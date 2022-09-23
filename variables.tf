@@ -140,21 +140,21 @@ variable "custom_image_resource_group_name" {
   default = "<custom image resource group>"
 }
 
-// License Type to create FortiGate-VM
+// license file for the active fgt IF using byol and supplying license file in "licenses" subdir - DO NOT populate if using flex
 // Provide the license type for FortiGate-VM Instances, either byol or payg.
-// If BYOL the fourth static route (for vnet summary) is not automatically created due to inherent FortiOS limitation before licensing.
+// If byol the fourth static route (for vnet summary) is not automatically created due to inherent FortiOS limitation before licensing.
 variable "license_type" {
   default = "payg"
 }
 
 // License Type to create FortiManager-VM
-// Provide the license type for FortiManager-VM Instances, either byol or trial. If BYOL the license variables need to be set.
+// Provide the license type for FortiManager-VM Instances, either byol or trial. If byol the license variables need to be set.
 variable "fmg_license_type" {
   default = "trial"
 }
 
 // License Type to create FortiAnalyzer-VM
-// Provide the license type for FortiAnalyzer-VM Instances, either byol or trial. If BYOL the license variables need to be set.
+// Provide the license type for FortiAnalyzer-VM Instances, either byol or trial. If byol the license variables need to be set.
 variable "faz_license_type" {
   default = "trial"
 }
@@ -264,7 +264,6 @@ variable "fazadminsport" {
   default = "4444"
 }
 
-
 variable "sshport" {
   type    = string
   default = "2222"
@@ -344,23 +343,30 @@ variable "bootstrap-faz" {
   default = "config-faz.conf"
 }
 
-// license file for the active fgt
-variable "license" {
+// license file for the active fgt IF using byol and supplying license file in "licenses" subdir - DO NOT populate if using flex
+variable "fgtlicense" {
   // Change to your own byol license file, license.lic
   type    = string
-  default = "FGVM02TM22024054.lic"
+  default = ""
 }
 
 variable "fmglicense" {
   // Change to your own byol license file, license.lic in licenses folder
   type    = string
-  default = "FMG-VMTM22012011.lic"
+  default = ""
 }
 
 variable "fazlicense" {
   // Change to your own byol license file, license.lic in licenses folder
   type    = string
-  default = "FAZ-VMTM22012345.lic"
+  default = ""
+}
+
+// Flex token for the active fgt IF using byol and using flex - DO NOT populate if supplying .lic file instead
+variable "fgtflextoken" {
+  // Change to your own Flex-VM token. 
+  type    = string
+  default = ""
 }
 
 variable "tags" {
@@ -468,26 +474,26 @@ variable "privatensg" {
   type = map(map(string))
   default = {
     i100 = {
-    name                       = "ingress"
-    priority                   = 100
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
+      name                       = "ingress"
+      priority                   = 100
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "*"
+      source_port_range          = "*"
+      destination_port_range     = "*"
+      source_address_prefix      = "*"
+      destination_address_prefix = "*"
     }
     e100 = {
-    name                       = "egress"
-    priority                   = 100
-    direction                  = "Outbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
+      name                       = "egress"
+      priority                   = 100
+      direction                  = "Outbound"
+      access                     = "Allow"
+      protocol                   = "*"
+      source_port_range          = "*"
+      destination_port_range     = "*"
+      source_address_prefix      = "*"
+      destination_address_prefix = "*"
     }
   }
 }

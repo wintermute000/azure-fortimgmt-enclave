@@ -48,8 +48,10 @@ client1port1            = "172.17.17.135"
 port1gateway            = "172.17.17.1"
 port2gateway            = "172.17.17.65"
 bootstrap-active        = "config-active.conf"
-license                 = "FGVM02TM22024054.lic"
-fmglicense = "FMG-VMTM22012011.lic"
+fgtlicense                 = ""
+fmglicense = ""
+fazlicense = ""
+fgtflextoken = ""
 tags = {
   Environment               = "test"
   

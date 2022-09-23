@@ -43,7 +43,7 @@ resource "azurerm_virtual_machine" "fmgvm" {
     custom_data = templatefile("${var.bootstrap-fmg}", {
       gwy          = var.port1gateway
       type         = var.fmg_license_type
-      license_file = "${path.module}/licenses/${var.fmglicense}"
+      license_file = var.fmglicense != "" ? "./licenses/${var.fmglicense}" : ""
     })
   }
 
