@@ -33,10 +33,10 @@ Terraform deploys the following components:
 * FortiAnalyzer VM in the first workload subnet.
 * Ubuntu 20.04 LTS test client VM in the first workload subnet.
 * UDRs for internal subnet routing table for default routing and inter-subnet routing through FortiGate.
-* FortiGate - Choose payg or byol in variables - if byol, place .lic files in subfolder "licenses" and define in variables.
-* FortiManager / FortiAnalyzer - Choose trial or byol in variables - if byol, place .lic files in subfolder "licenses" and define in variables.
+* FortiGate - Choose payg or byol in "license_type" variable (lowercase) - if byol and using license file, place .lic files in subfolder "licenses", define filename in "fgtlicense" variable and DO NOT populate the "fgtflextoken" variable. If using flex-vm, define token in "fgtflextoken" variable and DO NOT populate the "fgtlicense" variable. DO NOT populate a flex token variable if using a license file or vice versa.
+* FortiManager / FortiAnalyzer - Choose trial or byol in "fmg_license_type" and "faz_license_type" variables (lowercase) - if byol, place .lic files in subfolder "licenses" and define in variables.
 * Use lowercase for payg, byol, trial variables.
-* Terraform backend (versions.tf) stored in Azure storage - customise backend.conf to suit or modify as appropriate. An backend.conf.example is provided or comment out the backend "azurerm" resource block.
+* Terraform backend (versions.tf) stored in Azure storage - customise backend.conf to suit when initialising, or modify as appropriate. An backend.conf.example is provided or comment out the backend "azurerm" resource block.
 
 Topology using default variables
 
